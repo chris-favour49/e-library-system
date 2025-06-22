@@ -12,6 +12,8 @@ use App\Http\controllers\ClientContactController;
 use App\Http\controllers\TaskManagerController;
 use App\Http\controllers\ProjectTaskController;
 use App\Http\controllers\UsersController;
+use App\Http\controllers\DocumentController;
+use App\Http\Controllers\StudentController;
 
 
 
@@ -22,29 +24,28 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/student', [App\Http\Controllers\HomeController::class, 'student'])->name('student');
 
-Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 
-
-// Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // Task Manager
-Route::get( '/tasks', [ TaskManagerController::class, 'index' ] )->name( 'tasks' );
-Route::post( '/savetask', [ TaskManagerController::class, 'savetask' ] )->name( 'savetask' );
+Route::get( '/library', [ TaskManagerController::class, 'index' ] )->name( 'tasks' )->middleware('auth');
+Route::post( '/storebook', [ TaskManagerController::class, 'store' ] )->name( 'savetask' );
 Route::get( '/edittask/{id}', [ TaskManagerController::class, 'edittask' ] )->name( 'edittask' );
 Route::get( '/deletetask/{id}', [ TaskManagerController::class, 'deletetask' ] )->name( 'deletetask' );
-Route::post( '/updatetask', [ TaskManagerController::class, 'updatetask' ] )->name( 'updatetask' );
+Route::post( '/updatebook', [ TaskManagerController::class, 'updatetask' ] )->name( 'updatetask' );
+Route::get( '/download/{id}', [ TaskManagerController::class, 'download' ] )->name( 'download' );
 
 // Users
 Route::get( '/users', [ UsersController::class, 'index' ] )->name( 'users' );
 Route::post( '/saveuser', [ UsersController::class, 'saveuser' ] )->name( 'saveuser' );
 
 // Project Manager
-Route::get( '/projects', [ ProjectTaskController::class, 'index' ] )->name( 'projects' );
-Route::post( '/saveproject', [ ProjectTaskController::class, 'saveproject' ] )->name( 'saveproject' );
+Route::get( '/librarybooks', [ ProjectTaskController::class, 'index' ] )->name( 'projects' );
 Route::get( '/viewproject', [ ProjectTaskController::class, 'viewproject' ] )->name( 'viewproject' );
 
+//Student Manager
+Route::get('/welcomepage', [StudentController::class,'index'])->name('e-library');

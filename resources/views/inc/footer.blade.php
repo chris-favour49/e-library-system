@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <script>document.write(new Date().getFullYear())</script> © Software Developer.
+                <marquee behavior="1" direction="right"><script>document.write(new Date().getFullYear())</script> © E-Library Management System</marquee>
             </div>
         </div>
     </div>

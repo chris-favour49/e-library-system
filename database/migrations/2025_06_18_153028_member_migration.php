@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('project_models', function (Blueprint $table) {
+
+        Schema::create('member', function (Blueprint $table) {
             $table->id();
-            $table->string("projectname");
-            $table->string("description");
+            $table->string("username")->nullable();
+            $table->string("email")->nullable();
+            $table->string("password")->unique();
+            $table->string("confirmpassword")->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project__models');
+        Schema::dropIfExists('member');
     }
+
 };

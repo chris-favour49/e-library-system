@@ -34,6 +34,20 @@
     <link href=" {{ asset('steex/layouts/assets/css/custom.min.css')}}" rel="stylesheet" type="text/css">
 
 </head>
+<style>
+#a{
+    background-color: blue;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    width:100px; height: 30px;
+
+}
+#a:hover{
+    background-color: green;
+}
+</style>
+
 
 
 <body>
@@ -66,8 +80,8 @@
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Library Management</li>
+                                        <a href="{{route('home')}}"> <button id="a"> Back-To-Home</button></a>
+
                                     </ol>
                                 </div>
 
@@ -75,7 +89,7 @@
                         </div>
                     </div>
                     <div class="body">
-                        <div><img src="image/photo.png" alt="" style="width:800px ; height: 600px;border-radius: 15px;"></div>
+                        <div><img src="image/33.jpg" alt="" style="width:930px ; height: 600px;border-radius: 15px;"></div>
                      <div class="page">
                     <!-- end page title -->
 

@@ -64,6 +64,23 @@
                                                 @php
                                                      $count = 1;
                                                 @endphp
+                                                public function store( Request $request ) {
+                                                    $request->validate( [
+                                                        'file'=>'required|file|mimes:pdf|max:1024',//max 10MB
+                                                    ]);
+                                                    $path=$request->file('file')->store('documents', 'public');
+
+                                                        $document = new Task_Model();
+                                                        $document->isbn = $request->input('isbn');
+                                                        $document->book = $request->input('book');
+                                                        $document->author = $request->input('author');
+                                                        $document->category = $request->input('category');
+                                                        $document->pdf_path = $path;
+                                                        $document->save();
+
+                                                    return back() ->with( 'success', 'You have succefully Stored a Book' );
+                                                }
+
 
                                                 @foreach ($tasks as $project)
 

@@ -30,10 +30,10 @@
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="image/123.jpg" alt="Header Avatar">
+                            <img class="rounded-circle header-profile-user" src="image/photo.png" alt="Header Avatar">
                             <span class="text-start ms-xl-2">
 
-                                <span class="d-none d-xl-block ms-1 fs-sm user-name-sub-text"> Software Developer</span>
+                                <marquee behavior="1" direction="right"><span class="d-none d-xl-block ms-1 fs-sm user-name-sub-text">Welcome To Your E-library Dashbord</span></marquee>
                             </span>
                         </span>
                 </div>

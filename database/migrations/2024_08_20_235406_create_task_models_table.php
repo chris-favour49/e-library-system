@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('task_models', function (Blueprint $table) {
             $table->id();
             $table->string("user_id")->nullable();
-            $table->string("isbn")->nullable();
+            $table->string("isbn")->unique();;
             $table->string("book")->nullable();
             $table->string("author")->nullable();
             $table->string("category")->nullable();
-            $table->string("price")->nullable();
-            $table->string("copies")->nullable();
+            $table->string("pdf_path")->nullable();
             $table->timestamps();
         });
     }

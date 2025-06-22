@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang =eng>
-<title> Task Management</title>
+<title>E-library</title>
+<link rel="shortcut icon" href=" {{ asset('steex/layouts/assets/images/favicon.ico')}}">
 </html>
 @extends('master')
 @section('content')
@@ -66,8 +67,7 @@
                                             <th class="sort" data-sort="customer_name">Book title</th>
                                             <th class="sort" data-sort="customer_name">Author</th>
                                             <th class="sort" data-sort="phone">Category</th>
-                                            <th class="sort" data-sort="phone">Price</th>
-                                            <th class="sort" data-sort="customer_name">Copies</th>
+                                            <th class="sort" data-sort="phone">File Upload</th>
                                             <th class="sort" data-sort="status">Date Created</th>
                                             <th class="sort" data-sort="action">Action</th>
                                         </tr>
@@ -85,8 +85,7 @@
                                                     <td>{{ $task->book }}</td>
                                                     <td>{{ $task->author }}</td>
                                                     <td>{{ $task->category }}</td>
-                                                    <td>{{ $task->price }}</td>
-                                                    <td>{{ $task->copies }}</td>
+                                                    <td>{{ $task->pdf_path }}</td>
                                                     <td>{{ $task->datecreated }}</td>
                                                     <td>
                                                         <div class="d-flex gap-2">
@@ -152,18 +151,19 @@
                           </div>
                             <div class="mb-3">
                                 <label for="customername-field" class="form-label">Category</label>
-                                <input type="text" id="category" name="category" class="form-control" placeholder="Enter Category" required >
+                                <select id="catogory" name="category" class="form-control">
+                                    <option>Please Select Category</option>
+                                    <option>Computer Science</option>
+                                    <option>Mathematics</option>
+                                    <option>Statistics</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">File Upload</label>
+                                <input type="file" id="pdf_path" name="pdf_path" class="form-control" accept="application/pdf" placeholder="Enter Price" required >
                             </div>
 
-                            <div class="mb-3">
-                                <label for="email-field" class="form-label">Price</label>
-                                <input type="number" id="price" name="price" class="form-control" placeholder="Enter Price" required >
-                            </div>
 
-                            <div class="mb-3">
-                                <label for="email-field" class="form-label">Copies</label>
-                                <input type="text" id="copies" name="copies" class="form-control" placeholder="Enter Copies" required >
-                            </div>
                         <div class="modal-footer">
                             <div class="hstack gap-2 justify-content-end">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
