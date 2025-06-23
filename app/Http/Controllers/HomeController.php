@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Task_Model;
 use App\Models\User_Model;
-use App\Models\DocumentModel;
-
 use Illuminate\Http\Request;
+
+use App\Models\DocumentModel;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller {
     /**
@@ -25,6 +26,10 @@ class HomeController extends Controller {
     */
 
     public function index() {
+
+        if ( Auth::user() -> status == 'student' ) {
+            return view( 'studentdashboard' );
+        }
         return view ( 'home' )->with( 'status', 'You have succefully Logged in!' );
     }
 
