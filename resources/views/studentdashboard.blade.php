@@ -7,7 +7,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Dashboard</title>
+    <title>Student-Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Minimal Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
@@ -40,7 +40,7 @@
     border: none;
     border-radius: 10px;
     color: white;
-    width:100px; height: 30px;
+    width:60px; height: 30px;
 
 }
 #a:hover{
@@ -80,7 +80,7 @@
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <a href="{{route('home')}}"> <button id="a"> Back-To-Home</button></a>
+                                        <a href="{{route('studenthome')}}"> <button id="a">Home</button></a>
 
                                     </ol>
                                 </div>
@@ -91,7 +91,7 @@
                     <div class="body">
                         <div><img src="{{ asset('image/33.jpg') }}" alt="Library" style="width:930px; height:600px; border-radius:15px;">
 </div>
-                        
+
                      <div class="page">
                     <!-- end page title -->
 

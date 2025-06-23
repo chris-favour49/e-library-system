@@ -26,11 +26,7 @@
         </div>
 
         <!-- Insert Button -->
-        <div class="mb-3">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal">
-                <i class="ri-add-line me-1"></i> Insert Book
-            </button>
-        </div>
+
 
         <!-- Book Table -->
         <div class="table-responsive">
@@ -67,7 +63,6 @@
                             </td>
                             <td>{{ \Carbon\Carbon::parse($task->datecreated)->format('d M Y') }}</td>
                             <td>
-
                                 <a href="{{ route('edittask', $task->taskid) }}" class="btn btn-sm btn-primary">Edit</a>
 
                                 <button

@@ -12,6 +12,7 @@
     <meta content="Minimal Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
     <!-- App favicon -->
+    {{-- <link rel="shortcut icon" href=" {{ asset('steex/layouts/assets/images/favicon.ico')}}"> --}}
     <link rel="shortcut icon" href=" {{ asset('steex/layouts/assets/images/favicon.ico')}}">
     <!-- Fonts css load -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -40,7 +41,7 @@
     <div id="layout-wrapper">
 
         <!-- ========== App Menu ========== -->
-@include('inc.sidebar')
+@include('inc.studentsidebar')
 <!-- Left Sidebar End -->
 <!-- Vertical Overlay-->
 <div class="vertical-overlay"></div>

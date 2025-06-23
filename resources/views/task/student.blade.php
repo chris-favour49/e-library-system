@@ -1,6 +1,15 @@
+
+<meta charset="utf-8">
+<title>Student-Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="Minimal Admin & Dashboard Template" name="description">
+<meta content="Themesbrand" name="author">
+<!-- App favicon -->
+<link rel="shortcut icon" href=" {{ asset('steex/layouts/assets/images/favicon.ico')}}">
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -44,7 +53,7 @@
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <marquee behavior="1" direction="right"><h4 class="mb-sm-0">Welcome To E-library</h4></marquee>
-                                <a href="{{route('student')}}"> <button id="a"> Go-To-Dashbord</button></a>
+                                <a href="{{route('studentdashboard')}}"> <button id="a"> Go-To-Dashbord</button></a>
 
 
                             </div>

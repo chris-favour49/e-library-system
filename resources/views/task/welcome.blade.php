@@ -13,8 +13,7 @@
     <div class="welcome">
         Welcome to The Federal Polytechinc Ile-Oluji.
     </div>
-   <a href="{{route('login')}}"> <button class="btnlogin-popup" id="con">Student Login</button> </a>
-    <a href="{{route('home')}}"><button class="btnlogin-popup" id="con">Librarian Login</button> </a>
+    <a href="{{route('home')}}"><button class="btnlogin-popup" id="con">Login</button> </a>
 </div>
 
    {{-- <div class="wrapper">

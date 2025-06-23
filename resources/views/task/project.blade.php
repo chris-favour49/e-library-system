@@ -1,4 +1,4 @@
-@extends('master')
+@extends('studentmaster')
 @section('content')
 
 <div class="page-content">
@@ -8,13 +8,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h6 class="mb-0"><u>List of Available Books</u></h6>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="#">Library Manager</a></li>
-                            <li class="breadcrumb-item active">Books List</li>
+                            <li class="breadcrumb-item" ><a href="#" style="color: blue;">Student Library</a></li>
+                            <li class="breadcrumb-item active" style="color: blue;"> {{ Auth::user()->name }}</li>
                         </ol>
-                        <a href="{{ route('dashboard') }}" class="btn btn-sm btn-primary mt-2"><< Back</a>
+                        <a href="{{ route('studentdashboard') }}" class="btn btn-sm btn-primary mt-2"><< Back</a>
                     </div>
                 </div>
             </div>
@@ -54,9 +53,9 @@
                                             <td>{{ $task->category }}</td>
                                             <td>
                                                 @if($task->pdf_path)
-                                                    <a href="{{ asset('storage/' . $task->pdf_path) }}" target="_blank">
-                                                        View PDF
-                                                    </a>
+                                                <a href="{{ route('task.view_pdf', $task->taskid) }}" class="btn btn-sm btn-primary" target="_blank" >
+                                                    VIEW PDF
+                                                </a>
                                                 @else
                                                     No file
                                                 @endif
@@ -81,3 +80,4 @@
 </div>
 
 @endsection
+

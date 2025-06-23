@@ -2,22 +2,7 @@
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
     <div class="navbar-brand-box">
-        <a href="{{ route('dashboard') }}" class="logo logo-dark">
-            <span class="logo-sm">
-                <img src="{{ asset('steex/layouts/assets/images/logo-sm.png') }}" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="{{ asset('steex/layouts/assets/images/logo-dark.png') }}" alt="" height="22">
-            </span>
-        </a>
-        <a href="{{ route('dashboard') }}" class="logo logo-light">
-            <span class="logo-sm">
-                <img src="{{ asset('stee/layouts/asets/images/logo-sm.png') }}" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="{{ asset('ste/layouts/assets/images/logo-light.png') }}" alt="" height="22">
-            </span>
-        </a>
+
         <button type="button" class="btn btn-sm p-0 fs-3xl header-item float-end btn-vertical-sm-hover" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
@@ -42,11 +27,9 @@
                                 <a href="{{ route('tasks') }}" class="nav-link" data-key="t-two-column">Insert New Book</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('projects') }}" class="nav-link" data-key="t-two-column">Display Books</a>
+                                <a href="{{ route('managebooks') }}" class="nav-link" data-key="t-two-column">Manage Books</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('users') }}" class="nav-link" data-key="t-horizontal">Manage Books</a>
-                            </li>
+
                         </ul>
                     </div>
                 </li>

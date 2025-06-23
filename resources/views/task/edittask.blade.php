@@ -8,7 +8,7 @@
 
     @foreach ($users as $user)
     @endforeach
- 
+
 
     <div class="row">
         <div class="col-md-12 grid-margin">
@@ -49,8 +49,8 @@
                                         <select id="category" name="category" value= "{{$task->category}}" class="form-control">
                                             <option  value= "{{$task->category}}">Please Select Category</option>
                                             <option value="Computer Science">Computer Science</option>
-                                            <option >Mathematics</option>
-                                            <option >Statistics</option>
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="Statistics">Statistics</option>
                                       </select>
                               </div>
 

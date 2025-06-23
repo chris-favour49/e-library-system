@@ -7,7 +7,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Dashboard</title>
+    <title>Admin-Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Minimal Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
@@ -40,7 +40,7 @@
     border: none;
     border-radius: 10px;
     color: white;
-    width:100px; height: 30px;
+    width:60px; height: 30px;
 
 }
 #a:hover{
@@ -78,9 +78,10 @@
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0">Welcome To E-library</h4>
 
+
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <a href="{{route('home')}}"> <button id="a"> Back-To-Home</button></a>
+                                        <a href="{{route('home')}}"> <button id="a">Home</button></a>
 
                                     </ol>
                                 </div>
@@ -102,11 +103,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Laravel Developer.
+                            <script>document.write(new Date().getFullYear())</script>
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by Favour Sunday
+
                             </div>
                         </div>
                     </div>

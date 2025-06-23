@@ -6,31 +6,29 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     use AuthenticatesUsers;
 
     /**
-     * Determine where to redirect users after login based on their status.
-     *
-     * @return string
-     */
-    protected function redirectTo()
-    {
+    * Determine where to redirect users after login based on their status.
+    *
+    * @return string
+    */
+    protected function redirectTo() {
         $user = Auth::user();
 
-        if ($user->status === 'admin') {
+        if ( $user->status === 'admin' ) {
             return '/admin/dashboard';
-        } elseif ($user->status === 'student') {
-            return '/student/dashboard';
+        } elseif ( $user->status === 'student' ) {
+            return '/student/studentdashboard';
         }
 
-        return '/home'; // fallback
+        return '/home';
+        // fallback
     }
 
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+    public function __construct() {
+        $this->middleware( 'guest' )->except( 'logout' );
+        $this->middleware( 'auth' )->only( 'logout' );
     }
 }
