@@ -1,174 +1,119 @@
-<!DOCTYPE html>
-<html lang =eng>
-<title>E-library</title>
-<link rel="shortcut icon" href=" {{ asset('steex/layouts/assets/images/favicon.ico')}}">
-</html>
 @extends('master')
 @section('content')
 <div class="page-content">
     <div class="container-fluid">
-        @if (\Session::has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Congrats! </strong>{{ \Session::get('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
-        </div>
-    @endif
-    @if (\Session::has('danger'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>OOPS! </strong>{{ \Session::get('danger') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
-    </div>
-@endif
 
-        <!-- start page title -->
+        {{-- Flash Messages --}}
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+        @if(session('danger'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{ session('danger') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        <!-- Page Title -->
         <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                   <u> <h6 class="mb-sm-0">List of Available Books</h6></u>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Library Manager</a></li>
-                            <li class="breadcrumb-item active">Books-List</li>
-                        </ol>
-                        <div class="page-title-right">
-                            <a href="{{route('dashboard')}}" class="btn btn-sm btn-primary edit-item-btn"><< Back</a>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="col-12 d-flex justify-content-between align-items-center mb-2">
+                <h6><u>List of Available Books</u></h6>
+                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-primary"><< Back</a>
             </div>
         </div>
-        <!-- end page title -->
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title mb-0">Add, Edit & Remove</h4>
-                    </div><!-- end card header -->
-
-                    <div class="card-body">
-                        <div id="customerList">
-                            <div class="row g-4 mb-3">
-                                <div class="col-sm-auto">
-                                    <div>
-                                        <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Insert Book</button>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="table-responsive table-card mt-3 mb-1">
-                                <table class="table align-middle table-nowrap" id="customerTable">
-
-                                            <th class="sort" data-sort="email">SN</th>
-                                            <th class="sort" data-sort="customer_name">ISBN</th>
-                                            <th class="sort" data-sort="customer_name">Book title</th>
-                                            <th class="sort" data-sort="customer_name">Author</th>
-                                            <th class="sort" data-sort="phone">Category</th>
-                                            <th class="sort" data-sort="phone">File Upload</th>
-                                            <th class="sort" data-sort="status">Date Created</th>
-                                            <th class="sort" data-sort="action">Action</th>
-                                        </tr>
-                                    </thead>
-                                            <tbody>
-                                                @php
-                                                     $count = 1;
-                                                @endphp
-
-                                                @foreach ($tasks as $task)
-
-                                                <tr>
-                                                    <td>{{ $count }}</td>
-                                                    <td>{{ $task->isbn }}</td>
-                                                    <td>{{ $task->book }}</td>
-                                                    <td>{{ $task->author }}</td>
-                                                    <td>{{ $task->category }}</td>
-                                                    <td>{{ $task->pdf_path }}</td>
-                                                    <td>{{ $task->datecreated }}</td>
-                                                    <td>
-                                                        <div class="d-flex gap-2">
-                                                        <div class="edit">
-                                                            <a href="{{route('edittask',$task->taskid)}}" class="btn btn-sm btn-primary edit-item-btn">Edit</a></button>
-                                                        </div>
-                                                        <div class="edit">
-                                                            <a href="{{route('deletetask',$task->taskid)}}" class="btn btn-sm btn-danger edit-item-btn">Delete</a></button>
-                                                        </div>
-                                                      </td>
-                                                    </tr>
-                                               </tr>
-                                               @php
-                                                     $count++;
-                                                @endphp
-
-                                                @endforeach
-                                            </tbody>
-                                          </table>
-                                        </div>
-
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                            </div>
-
-
-                        </div>
-                    </div><!-- end card -->
-                </div>
-                <!-- end col -->
-            </div>
-            <!-- end col -->
+        <!-- Insert Button -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showModal">
+                <i class="ri-add-line me-1"></i> Insert Book
+            </button>
         </div>
-        <!-- end row -->
 
-        <!-- end row -->
+        <!-- Book Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>ISBN</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>File</th>
+                        <th>Date Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $count = 1; @endphp
+                    @foreach($tasks as $task)
+                        <tr>
+                            <td>{{ $count++ }}</td>
+                            <td>{{ $task->isbn }}</td>
+                            <td>{{ $task->book }}</td>
+                            <td>{{ $task->author }}</td>
+                            <td>{{ $task->category }}</td>
+                            <td>
+                                @if($task->pdf_path)
+                                    <a href="{{ asset('storage/' . $task->pdf_path) }}" target="_blank">Download</a>
+                                @else
+                                    No File
+                                @endif
+                            </td>
+                            <td>{{ \Carbon\Carbon::parse($task->datecreated)->format('d M Y') }}</td>
+                            <td>
+                                <a href="{{ route('edittask', $task->taskid) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('deletetask', $task->taskid) }}" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-        <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-`                                                        dialog-centered">
+        <!-- Modal for Insert Book -->
+        <div class="modal fade" id="showModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header bg-light p-3">
-                        <h5 class="modal-title" id="exampleModalLabel">Insert Book</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
-                    </div>
-                    <form action="{{ route('savetask')}}" class="tablelist-form" method="Post">
+                    <form action="{{ route('savetask') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="modal-header bg-light">
+                            <h5 class="modal-title">Insert Book</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
                         <div class="modal-body">
-
-
                             <div class="mb-3">
-                                <label for="customername-field" class="form-label">ISBN</label>
-                                <input type="text" id="isbn" name="isbn" class="form-control" placeholder="Enter ISBN" required >
+                                <label>ISBN</label>
+                                <input type="text" name="isbn" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label for="customername-field" class="form-label">Book Title</label>
-                                <input type="text" id="book" name="book" class="form-control" placeholder="Enter Book Title" required >
+                                <label>Book Title</label>
+                                <input type="text" name="book" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label for="customername-field" class="form-label">Author</label>
-                                <input type="text" id="author" name="author" class="form-control" placeholder="Enter Author" required >
-                          </div>
+                                <label>Author</label>
+                                <input type="text" name="author" class="form-control" required>
+                            </div>
                             <div class="mb-3">
-                                <label for="customername-field" class="form-label">Category</label>
-                                <select id="catogory" name="category" class="form-control">
-                                    <option>Please Select Category</option>
+                                <label>Category</label>
+                                <select name="category" class="form-control" required>
+                                    <option value="">Select Category</option>
                                     <option>Computer Science</option>
                                     <option>Mathematics</option>
                                     <option>Statistics</option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="email-field" class="form-label">File Upload</label>
-                                <input type="file" id="pdf_path" name="pdf_path" class="form-control" accept="application/pdf" placeholder="Enter Price" required >
+                                <label>PDF File</label>
+                                <input type="file" name="pdf_path" class="form-control" accept="application/pdf" required>
                             </div>
-
-
+                        </div>
                         <div class="modal-footer">
-                            <div class="hstack gap-2 justify-content-end">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success" id="add-btn" onclick="form_submit()">Save Entry</button>
-                            </div>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Save Entry</button>
                         </div>
                     </form>
                 </div>
@@ -176,7 +121,5 @@
         </div>
 
     </div>
-    <!-- container-fluid -->
 </div>
-
 @endsection

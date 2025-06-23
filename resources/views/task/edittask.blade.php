@@ -47,10 +47,10 @@
                                     <option value= "{{$task->category}}" name="category" class="form-control">
                                         {{$task->category}} </option>
                                         <select id="category" name="category" value= "{{$task->category}}" class="form-control">
-                                            <option>Please Select Category</option>
-                                            <option>Computer Science</option>
-                                            <option>Mathematics</option>
-                                            <option>Statistics</option>
+                                            <option  value= "{{$task->category}}">Please Select Category</option>
+                                            <option value="Computer Science">Computer Science</option>
+                                            <option >Mathematics</option>
+                                            <option >Statistics</option>
                                       </select>
                               </div>
 

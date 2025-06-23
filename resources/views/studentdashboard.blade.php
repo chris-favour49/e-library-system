@@ -56,7 +56,7 @@
     <div id="layout-wrapper">
 
         <!-- ========== App Menu ========== -->
-@include('inc.sidebar')
+@include('inc.studentsidebar')
 <!-- Left Sidebar End -->
 <!-- Vertical Overlay-->
 <div class="vertical-overlay"></div>
@@ -91,6 +91,7 @@
                     <div class="body">
                         <div><img src="{{ asset('image/33.jpg') }}" alt="Library" style="width:930px; height:600px; border-radius:15px;">
 </div>
+                        
                      <div class="page">
                     <!-- end page title -->
 

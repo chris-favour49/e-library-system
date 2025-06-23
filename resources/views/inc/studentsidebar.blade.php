@@ -38,15 +38,11 @@
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('tasks') }}" class="nav-link" data-key="t-two-column">Insert New Book</a>
-                            </li>
+                          
                             <li class="nav-item">
                                 <a href="{{ route('projects') }}" class="nav-link" data-key="t-two-column">Display Books</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('users') }}" class="nav-link" data-key="t-horizontal">Manage Books</a>
-                            </li>
+                           
                         </ul>
                     </div>
                 </li>

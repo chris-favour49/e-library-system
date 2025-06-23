@@ -1,90 +1,97 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Task_Model;
-use App\Models\Project_Model;
-use App\Models\User;
 use App\Models\User_Model;
-use App\Models\DocumentModel;
 
-class TaskManagerController extends Controller {
-
-    // The function that captures all the informations on task
-
-    public function index() {
+class TaskManagerController extends Controller
+{
+    public function index()
+    {
         $user = User_Model::all();
-        $task = Task_Model::leftjoin( 'user_models', 'user_models.id', '=', 'task_models.user_id' )
-        ->get( [ 'user_models.id as id', 'task_models.id as taskid', 'task_models.isbn as isbn', 'task_models.book as book',
-        'task_models.author as author', 'task_models.category as category','task_models.pdf_path as pdf_path','task_models.created_at as datecreated' ] );
-        return view( 'task.taskmanager' )->with( 'tasks', $task )->with( 'users', $user );
+        $task = Task_Model::leftJoin('user_models', 'user_models.id', '=', 'task_models.user_id')
+            ->get([
+                'user_models.id as id',
+                'task_models.id as taskid',
+                'task_models.isbn',
+                'task_models.book',
+                'task_models.author',
+                'task_models.category',
+                'task_models.pdf_path',
+                'task_models.created_at as datecreated',
+            ]);
 
+        return view('task.taskmanager', compact('task', 'user'))->with('tasks', $task)->with('users', $user);
     }
 
-    // The function that saves task
+    public function store(Request $request)
+    {
+        $request->validate([
+            'isbn' => 'required',
+            'book' => 'required',
+            'author' => 'required',
+            'category' => 'required',
+            'pdf_path' => 'required|mimes:pdf|max:20480',
+        ]);
 
-    public function store( Request $request ) {
+        $filePath = $request->file('pdf_path')->store('books', 'public');
 
-        Task_Model::create( [
-            'user_id'=> $request->assignee,
-            'isbn' =>$request->isbn,
-            'book'=>$request->book,
-            'author'=>$request->author,
-            'category'=>$request->category,
-            'pdf_path' =>$request->pdf_path,
-        ] );
-        return back() ->with( 'success', 'You have succefully Stored a Book' );
+        Task_Model::create([
+            'user_id' => auth()->id(), // or use $request->assignee if required
+            'isbn' => $request->isbn,
+            'book' => $request->book,
+            'author' => $request->author,
+            'category' => $request->category,
+            'pdf_path' => $filePath,
+        ]);
+
+        return back()->with('success', 'You have successfully stored a book.');
     }
 
-    // end
-
-    // The function that edits task
-
-    public function edittask( $id ) {
+    public function edittask($id)
+    {
         $user = User_Model::all();
-        $task  = Task_Model::find( $id );
-        return view( 'task.edittask' )->with( 'task', $task )->with( 'users', $user );
+        $task = Task_Model::findOrFail($id);
+        return view('task.edittask', compact('task', 'user'))->with('task', $task)->with('users', $user);
     }
-    // end
 
-    // The function that updates task
+    public function updatetask(Request $request)
+    {
+        $task = Task_Model::findOrFail($request->taskid);
 
-    public function updatetask( Request $request ) {
-        Task_Model::updateOrCreate( [
-            'id'=>$request->taskid,
-        ] ,
-        [ 'user_id'=> $request->assignee,
-        'isbn' =>$request->isbn,
-        'book'=>$request->book,
-        'author'=>$request->author,
-        'category'=>$request->category,
-        'pdp_path'=>$request->pdf_path,
-            ] );
-         return redirect()->route( 'tasks' )->with( 'success', 'Data updated successfully' );
-
-    }
-    //end
-
-    // The function that deletes task
-
-    public function deletetask( $id ) {
-        $task  = Task_Model::find( $id )->delete();
-        return back() ->with( 'success', 'Data Deleted Successfully' );
-
-        }
-        //end
-
-        // The function to download a file
-        public function download( $id ) {
-            $task  = Task_Model::find($id);
-            $pdf_path = $task->pdf_path;
-            if ( !Storage::exists( $pdf_path ) ) {
-                return abort( 404, 'file not found' )->with( 'task', $task );
-                ;
-            }
-            return Storage::download( $pdf_path, basename ( $pdf_path ) );
+        if ($request->hasFile('pdf_path')) {
+            $filePath = $request->file('pdf_path')->store('books', 'public');
+            $task->pdf_path = $filePath;
         }
 
+        $task->update([
+            'user_id' => $request->assignee,
+            'isbn' => $request->isbn,
+            'book' => $request->book,
+            'author' => $request->author,
+            'category' => $request->category,
+        ]);
+
+        return redirect()->route('tasks')->with('success', 'Data updated successfully');
     }
 
+    public function deletetask($id)
+    {
+        $task = Task_Model::findOrFail($id);
+        $task->delete();
+        return back()->with('success', 'Data deleted successfully');
+    }
+
+    public function download($id)
+    {
+        $task = Task_Model::findOrFail($id);
+        if (!Storage::disk('public')->exists($task->pdf_path)) {
+            return back()->with('danger', 'File not found.');
+        }
+
+        return Storage::disk('public')->download($task->pdf_path);
+    }
+}
