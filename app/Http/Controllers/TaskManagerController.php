@@ -82,11 +82,12 @@ class TaskManagerController extends Controller {
 
     public function download( $id ) {
         $task = Task_Model::findOrFail( $id );
-        if ( !Storage::disk()->exists( $task->pdf_path ) ) {
+        if ( !Storage::disk('public')->exists( $task->pdf_path ) ) {
             return back()->with( 'danger', 'File not found.' );
         }
 
-        return Storage::disk( 'public' )->path( $task->pdf_path );
+       return Storage::disk('public')->download($task->pdf_path);
+
     }
 
     public function view( $id ) {
